@@ -109,6 +109,14 @@ window.addEventListener("DOMContentLoaded", () => {
       item.classList.remove('tabheader__item_active');
     });
   }
+
+  function showTabContent(i) {
+    tabsContent[i].style.display = 'block';
+    tabs[i].classList.add('tabheader__item_active');
+  }
+
+  hideTabContent();
+  showTabContent(0);
 });
 
 /***/ })
