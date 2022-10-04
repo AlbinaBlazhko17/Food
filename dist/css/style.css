@@ -219,7 +219,7 @@ a {
 }
 
 .hide {
-  display: block;
+  display: none;
 }
 
 .fade {
