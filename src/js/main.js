@@ -44,12 +44,18 @@ window.addEventListener ("DOMContentLoaded", () => {
     const deadline = '2022-11-02';
 
     function getTimeRemaining (endtime) {
-        const total = Date.parse(endtime) - Date.parse(new Date()),
+        let days, hours, minutes, seconds;
+        const total = Date.parse(endtime) - Date.parse(new Date());
+
+        if (t <= 0){
+            days = hours = minutes = seconds = 0;
+        }
+        else {
               days = Math.floor (total / (1000 * 60 * 60 * 24)),
               hours = Math.floor (total / (1000 * 60 * 60) % 24),
               minutes = Math.floor ((total / 1000 / 60) % 60),
               seconds = Math.floor ((total / 1000) % 60);
-        
+        }
         return {total,days,hours,minutes,seconds};
     }
 
