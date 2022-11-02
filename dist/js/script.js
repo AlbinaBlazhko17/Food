@@ -256,10 +256,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
   new MenuCard("img/tabs/vegy.jpg", "vegy", 'Меню "Фитнес"', "Меню 'Фитнес' - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!", 9, '.menu .container').render();
   new MenuCard("img/tabs/elite.jpg", "elite", 'Меню “Премиум”', "В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!", 10, '.menu .container').render();
-  new MenuCard("img/tabs/post.jpg", "post", 'Меню "Постное"”', "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.", 20, '.menu .container').render();
+  new MenuCard("img/tabs/post.jpg", "post", 'Меню "Постное"”', "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.", 20, '.menu .container').render(); // Forms
+
   const forms = document.querySelectorAll('form');
   const message = {
-    loading: 'Loading',
+    loading: 'img/form/spinner.svg',
     success: 'Thanks!',
     failure: 'Error'
   };
@@ -270,10 +271,13 @@ window.addEventListener("DOMContentLoaded", () => {
   function postData(form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const statusMessage = document.createElement('div');
-      statusMessage.classList.add('status');
-      statusMessage.textContent = message.loading;
-      form.append(statusMessage);
+      let statusMessage = document.createElement('img');
+      statusMessage.src = message.loading;
+      statusMessage.style.cssText = `
+                display: block;
+                margin: 0 auto;
+            `;
+      form.insertAdjacentElement('afterend', statusMessage);
       const request = new XMLHttpRequest();
       request.open('POST', 'server.php');
       request.setRequestHeader('Content-type', 'application/json');

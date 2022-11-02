@@ -193,10 +193,12 @@ window.addEventListener ("DOMContentLoaded", () => {
         '.menu .container'
     ).render();
 
+    // Forms
+
     const forms = document.querySelectorAll('form');
 
     const message = {
-        loading: 'Loading',
+        loading: 'img/form/spinner.svg',
         success: 'Thanks!',
         failure: 'Error'
     };
@@ -209,10 +211,13 @@ window.addEventListener ("DOMContentLoaded", () => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const statusMessage = document.createElement('div');
-            statusMessage.classList.add('status');
-            statusMessage.textContent = message.loading;
-            form.append(statusMessage);
+            let statusMessage = document.createElement('img');
+            statusMessage.src = message.loading;
+            statusMessage.style.cssText = `
+                display: block;
+                margin: 0 auto;
+            `;
+            form.insertAdjacentElement('afterend', statusMessage);
 
             const request = new XMLHttpRequest();
             request.open ('POST', 'server.php');
@@ -234,7 +239,7 @@ window.addEventListener ("DOMContentLoaded", () => {
                 if (request.status == 200) {
                     console.log (request.response);
                     showThanksModal(message.success);
-                    form.reset();
+                    form.reset();  
                     statusMessage.remove();
                 } else {
                     showThanksModal(message.failure);
